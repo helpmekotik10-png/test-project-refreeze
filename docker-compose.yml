@@ -16,8 +16,8 @@ services:
     command: >
       sh -c "
       sleep 15 &&
-      cp .env.example .env ||
-      php artisan key:generate ||
+      cp .env.example .env &&
+      php artisan key:generate &&
       composer install &&
       php artisan config:clear &&
       php artisan migrate --force &&
