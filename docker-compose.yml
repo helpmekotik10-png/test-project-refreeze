@@ -44,7 +44,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: shop_catalog
-      MYSQL_USER: root
+      MYSQL_USER: user
       MYSQL_PASSWORD: password
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
