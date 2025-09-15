@@ -15,12 +15,9 @@ services:
         condition: service_healthy
     command: >
       sh -c "
-      if [ ! -f .env ]; then
-        cp .env.example .env
-        echo '✅ .env created from .env.example'
-      fi &&
-      php artisan key:generate ||
-      echo '✅ APP_KEY generated' &&
+      rm -f .env &&
+      cp .env.example .env &&
+      php artisan key:generate &&
       composer install &&
       php artisan config:clear &&
       php-fpm
