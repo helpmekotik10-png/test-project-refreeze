@@ -13,7 +13,15 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    command: sh -c "composer install && php artisan config:cache && php artisan migrate --force && php-fpm"
+    command: >
+      sh -c "
+      cp .env.example .env &&
+      php artisan key:generate &&
+      php artisan config:cache &&
+      php artisan migrate --force &&
+      composer install &&
+      php-fpm
+      "
 
   nginx:
     image: nginx:alpine
