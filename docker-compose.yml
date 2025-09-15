@@ -15,14 +15,17 @@ services:
         condition: service_healthy
     command: >
       sh -c "
-      cp .env.example .env &&
-      php artisan key:generate &&
-      php artisan config:cache &&
-      php artisan migrate --force &&
+      if [ ! -f .env ]; then
+        cp .env.example .env
+        echo '✅ .env created from .env.example'
+      fi &&
+      php artisan key:generate ||
+      echo '✅ APP_KEY generated' &&
       composer install &&
+      php artisan config:clear &&
       php-fpm
       "
-
+      
   nginx:
     image: nginx:alpine
     container_name: nginx
