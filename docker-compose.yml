@@ -20,6 +20,7 @@ services:
       php artisan key:generate &&
       composer install &&
       php artisan config:clear &&
+      php artisan migrate --force &&
       php-fpm
       "
       
